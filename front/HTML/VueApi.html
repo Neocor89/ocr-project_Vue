@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/VueApi.css">
+  <title>Test Vue Api Response</title>
+</head>
+<body>
+
+
+  <div id="app">
+
+  
+    <header>
+      <nav class="nav__container">
+      
+        <ul class="nav__container__list">
+          <li class="list__content">Websites</li>
+          <li class="list__content">Top 10</li>
+          <li class="list__content">About</li>
+        </ul>
+      
+      </nav>
+    </header>
+
+    <main class="home__page">
+      <div class="home__page__container_website">
+        <ul>
+          <li v-for="item in apiResponse">
+            <a :href="item.url">{{ item.name }}</a>
+          </li>
+        </ul>
+      <!-- </div>
+      <div class="card">
+        <img src="../assets/profile_winter.png" alt="photo profile_winter" class="card__img">
+        <h4>Ben Devweb Developper</h4>
+      </div> -->
+  </main>
+
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        apiResponse: [
+        { name: 'Github', url: 'https://github.com' },
+        {name: 'Twitter', url: 'https://twitter.com' },
+        ]
+      }
+    })
+
+  </script>
+  
+</body>
+</html>

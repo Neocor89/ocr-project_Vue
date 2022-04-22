@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link rel="stylesheet" href="./coffee.css" />
+		<link rel="stylesheet" href="../CSS/coffee.css" />
 		<title>Cafe with a Vue</title>
 	</head>
 	<body>
@@ -31,7 +31,7 @@
 						<p v-if="item.inStock">En stock</p>
 						<p class="stock" v-else>En rupture de stock</p>
 						<div>
-							<label for="add-item-quantity">Quantité : {{ item.quantity }}</label>
+							<label for="add-item-quantity">Quantité :</label>
 							<input v-model="item.quantity"  id="add-item-quantity" type="number" />
 							<button @click="addShoppingCart(item.quantity)">
                 Ajouter au panier d'achat

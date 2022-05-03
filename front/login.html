@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page Vue</title>
+
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #425da8;
+      border-radius: 9rem;
+    }
+    
+    /* .box--else--if {
+      width: 200px;
+      height: 200px;
+      background: #b14f4f;
+    }
+    
+    .box--else {
+      width: 200px;
+      height: 200px;
+      background: #39b654;
+    } */
+
+    [v-cloak] {
+      display: none;
+    }
+
+    input {
+      margin: 20px;
+      outline: 1px solid #4c4ab3;
+      border: none;
+      height: 25px;
+      width: 190px;
+      display: block;
+    }
+    
+    </style>
+
+</head>
+<body>
+
+  <div id="app">
+    
+    
+    <login-form />
+
+
+    <!--
+      <div>
+       {{ greeting }}
+        <input @keyup.enter="greet(greeting + 'My World')" v-model="greeting" /> 
+      </div>
+      : Avec la methode @keyup + 
+      :: Ajout à la validation sur enter
+      ::: Correspond à @keyup.enter
+      :::: Possible de faire greet(greeting) 
+      ::::: Et dans le script enlever this et ajouter
+      :::::: greet(greeting) {
+      ::::::: console.log(greeting);
+    ------------------------------------------------>
+
+    <button @click="toggle__box">Toggle Box</button>
+
+    <!--
+      : Possible d'ajouter des spécificitées
+      :: à la methode @click Exemples :
+      ::: @click.right = clique droit
+      :::: @click.prevent = preventDefault
+      ::::: @click.stop = stopPropagation
+    ------------------------------------->
+
+    <div v-if="isVisible" class="box"></div>
+    <!-- <div v-else-if="elseIsVisible" class="box--else--if"></div>
+    <div v-else class="box--else"></div> -->
+
+
+  </div>
+  
+
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+let app = Vue.createApp({
+  data: function() {
+    return {
+      greeting: 'Hello World',
+      isVisible: false
+    }
+    },
+    methods: {
+      toggle__box() {
+        this.isVisible = !this.isVisible
+      },
+      greet(greeting) {
+       console.log(greeting)
+       
+      }
+    }
+})
+/*
+: Les component(s) dans Vue js 
+:: Doivent être renseigné après le (Vue.createApp)
+::: Et avant que que l'application soit montée 
+:::: Donc = app.mount('#app') v-bind:label="passwordLabel"
+*/
+app.component('login-form', {
+  template: `
+    <form @submit.prevent="handleSubmit">
+      <h1>{{ title }}</h1>
+      <custom-input v-model="password" :label="passwordLabel" />
+      <custom-input v-model="email" :label="emailLabel" />
+      <button>Login</button>
+    </form>
+  `,
+  component: ['custom-input'],
+  data() {
+    return {
+    title: 'Login Form',
+    email: '',
+    password: '',
+    passwordLabel: 'Password',
+    emailLabel: 'Email'
+  }
+  },
+  methods: {
+    handleSubmit() {
+      console.log(this.email, password);
+      
+    }
+  }
+})
+
+app.component('custom-input', {
+  template: `
+    <label>
+      {{ label }}
+      <input type="text" v-model="inputValue" >
+    </label>
+  `,
+  props: ['label', 'modelValue'],
+  computed: {
+    inputValue: {
+      get() {
+        //: Obtenir la valeur de la variable du parent du component = get()
+        return this.modelValue
+
+      },
+      set(value) {
+        //: Definir ou enregistrer la valeur du parent du component de la variable = set()
+        this.$emit('update:modelValue', value)
+        //: Premier argument est le type d'évènements
+        //:: Deuxieme argumetn est la value 
+      }
+    }
+  }
+  // data() {
+  //   return {
+  //     inputValue: ''
+  //   }
+  // }
+})
+
+app.mount('#app')
+
+  </script>
+
+
+
+
+</body>
+</html>
